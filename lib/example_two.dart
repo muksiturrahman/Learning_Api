@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:api/example_three.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -30,15 +31,35 @@ class _ExampleTwoState extends State<ExampleTwo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 100,
+        backgroundColor: Colors.transparent,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(140),
+          ),
+        ),
+        title: Text("Api",style: TextStyle(fontSize: 50,color: Colors.pinkAccent,fontWeight: FontWeight.bold),),
         centerTitle: true,
-        title: Text("Api"),
       ),
       body: Column(
         children: [
+          TextButton(
+            onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>ExampleThree()));
+            },
+            child: Container(
+              height: 20,
+              width: 100,
+              child: Center(child: Text("Tap here",style: TextStyle(color: Colors.pink),)),
+            ),
+          ),
           Expanded(
             child: FutureBuilder(
               future: getPhotos(),
                 builder: (context,AsyncSnapshot<List<Photos>> snapshot){
+                  if(!snapshot.hasData){
+                    return Center(child: Text("Loading",style: TextStyle(fontSize:50,color: Colors.pinkAccent),));
+                  }else{
                   return ListView.builder(
                     itemCount: photosList.length,
                       itemBuilder: (context, index){
@@ -50,6 +71,7 @@ class _ExampleTwoState extends State<ExampleTwo> {
                           title: Text("Notes id: "+snapshot.data![index].id.toString()),
                         );
                     });
+                  }
               }),
           )
         ],

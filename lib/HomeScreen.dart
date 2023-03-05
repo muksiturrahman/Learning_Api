@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:api/example_two.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'models/postsModels.dart';
@@ -42,42 +43,54 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text("Api",style: TextStyle(fontSize: 50,color: Colors.pinkAccent,fontWeight: FontWeight.bold),),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          Container(
-            margin: EdgeInsets.all(5),
-            height: 700,
-            color: Colors.pinkAccent,
-            child: Expanded(
-              child: FutureBuilder(
-                future: getPostApi(),
-                builder: (context, snapshot){
-                  if(!snapshot.hasData){
-                    return Center(child: Text("Loading",style: TextStyle(fontSize:50,color: Colors.pinkAccent),));
-                  }else{
-                    return ListView.builder(
-                      itemCount: postList.length,
-                        itemBuilder: (context, index){
-                        return Card(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(postList[index].title.toString(),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.pinkAccent),),
-                                SizedBox(height: 20,),
-                                Text(postList[index].body.toString(),style: TextStyle(fontWeight: FontWeight.normal,fontSize: 15,color: Colors.pinkAccent),),
-                              ],
-                            ),
-                          ),
-                        );
-                      });
-                  }
-                },
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            TextButton(
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>ExampleTwo()));
+              },
+              child: Container(
+                height: 20,
+                width: 100,
+                child: Center(child: Text("Tap here",style: TextStyle(color: Colors.pink),)),
               ),
             ),
-          )
-        ],
+            Container(
+              margin: EdgeInsets.all(5),
+              height: 700,
+              color: Colors.pinkAccent,
+              child: Expanded(
+                child: FutureBuilder(
+                  future: getPostApi(),
+                  builder: (context, snapshot){
+                    if(!snapshot.hasData){
+                      return Center(child: Text("Loading",style: TextStyle(fontSize:50,color: Colors.pinkAccent),));
+                    }else{
+                      return ListView.builder(
+                        itemCount: postList.length,
+                          itemBuilder: (context, index){
+                          return Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(postList[index].title.toString(),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.pinkAccent),),
+                                  SizedBox(height: 20,),
+                                  Text(postList[index].body.toString(),style: TextStyle(fontWeight: FontWeight.normal,fontSize: 15,color: Colors.pinkAccent),),
+                                ],
+                              ),
+                            ),
+                          );
+                        });
+                    }
+                  },
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

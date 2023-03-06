@@ -1,3 +1,4 @@
+import 'package:api/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -27,7 +28,7 @@ class _ExampleFiveState extends State<ExampleFive> {
         children: [
           TextButton(
             onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>ExampleFive()));
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUpScreen()));
             },
             child: Container(
               height: 20,

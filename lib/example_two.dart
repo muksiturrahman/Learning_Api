@@ -47,11 +47,7 @@ class _ExampleTwoState extends State<ExampleTwo> {
             onPressed: (){
               Navigator.push(context, MaterialPageRoute(builder: (context)=>ExampleThree()));
             },
-            child: Container(
-              height: 20,
-              width: 100,
-              child: Center(child: Text("Tap here",style: TextStyle(color: Colors.pink),)),
-            ),
+            child: Center(child: Text("Tap here",style: TextStyle(color: Colors.pink),)),
           ),
           Expanded(
             child: FutureBuilder(

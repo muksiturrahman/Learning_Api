@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:api/only%20image%20upload.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
@@ -78,6 +79,12 @@ class _UploadImageState extends State<UploadImage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            TextButton(
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>OnlyUpload()));
+              },
+              child: Center(child: Text("Tap here",style: TextStyle(color: Colors.pink),)),
+            ),
             GestureDetector(
               onTap: (){
                 getImage();
